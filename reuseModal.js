@@ -7,6 +7,7 @@
             modalTitle: modalWindow.find('.modal-title'),
             modalBody: modalWindow.find('.modal-body'),
             modalFooter: modalWindow.find('.modal-footer'),
+            modalId: this.data('modal-id') ? this.data('modal-id') : this.prop('id'),
             title: '',
             body: '',
             footer: '',
@@ -16,7 +17,7 @@
         }, options );
 
         // Remove all elements with marked class when opening modal and state is finished
-        if (modalWindow.data('state') === 'finished') {
+        if (modalWindow.data('state') === 'finished' || modalWindow.data('modal-id') !== settings.modalId) {
             $(settings.removeClass).remove();
         }
 
@@ -30,7 +31,7 @@
         }
 
         // If modal was finished or action sent "update" - reload all data
-        if (modalWindow.data('state') !== 'new' || settings.action === 'update') {
+        if (modalWindow.data('state') !== 'new' || settings.action === 'update' || modalWindow.data('modal-id') !== settings.modalId) {
             settings.modalTitle.html(settings.title);
             settings.modalBody.html(settings.body);
             settings.modalFooter.prepend(settings.footer);
