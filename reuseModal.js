@@ -16,6 +16,10 @@
             state: 'new'
         }, options );
 
+        if (typeof(modalWindow.data('modal-id')) === 'undefined') {
+            modalWindow.data('modal-id', settings.modalId);
+        }
+
         // Remove all elements with marked class when opening modal and state is finished
         if (modalWindow.data('state') === 'finished' || modalWindow.data('modal-id') !== settings.modalId) {
             $(settings.removeClass).remove();
@@ -30,9 +34,9 @@
             }
         }
 
-        // If modal was finished or action sent "update" - reload all data
+        // If modal was finished or action sent "update" or this is another modal - reload all data
         if (modalWindow.data('state') !== 'new' || settings.action === 'update' || modalWindow.data('modal-id') !== settings.modalId) {
-            settings.modalTitle.html(settings.title);
+            //settings.modalTitle.html(settings.title);
             settings.modalBody.html(settings.body);
             settings.modalFooter.prepend(settings.footer);
         }
